@@ -66,9 +66,6 @@ class _MyAppState extends State<MyApp> {
       }
     }
 
-    void answerPrinter1() {
-      print("Answer chosen");
-    }
 
     return MaterialApp(
       home: Scaffold(
