@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './Question_widget.dart';
+import 'package:flutter_course_app_1/Quiz.dart';
+import 'package:flutter_course_app_1/Result.dart';
 
 // void main(){
 //   runApp(MyApp());
@@ -18,6 +19,27 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var questionIndex = 0;
 
+  final _questions = const [
+    {
+      'question': "Question 1",
+      'answer': ["q1op1", "q1op2", "q1op3", "q1op4"]
+    },
+    {
+      'question': "Question 2",
+      'answer': ["q2op1", "q2op2", "q2op3", "q2op4"]
+    },
+    {
+      'question': "Question 3",
+      'answer': ["q3op1", "q3op2", "q3op3", "q3op4"]
+    },
+  ];
+
+  void _resetQuiz(){
+    setState(() {
+      questionIndex = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // void answerPrinter(String value) {
@@ -33,13 +55,13 @@ class _MyAppState extends State<MyApp> {
     //   }
     // }
 
-    void answerPrinter(String value) {
-      print("$value clicked!");
-      if (questionIndex < 1) {
-        questionIndex += 1;
+    void answerPrinter(String x) {
+      print("$x clicked!");
+      if (questionIndex == 2) {
+        //questionIndex = 0;
         setState(() {});
       } else {
-        questionIndex -= 1;
+        questionIndex += 1;
         setState(() {});
       }
     }
@@ -48,33 +70,18 @@ class _MyAppState extends State<MyApp> {
       print("Answer chosen");
     }
 
-    var questions = <String>[
-      "Favourite colour?",
-      "Favourite animal",
-    ];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text("Hello World App"),
         ),
-        body: Column(children: <Widget>[
-          Question(
-            questions[questionIndex],
-          ),
-          Row(
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () => answerPrinter("Answer 1"),
-                child: Text("Answer1"),
-              ),
-              ElevatedButton(
-                onPressed: () => answerPrinter("Answer 2"),
-                child: Text("Answer2"),
+        body: (questionIndex != 2)
+            ? Quiz(
+                questions: _questions,
+                answerPrinter: answerPrinter,
+                questionIndex: questionIndex,
               )
-            ],
-          )
-        ]),
+            : Result(_resetQuiz),
       ),
     );
   }
