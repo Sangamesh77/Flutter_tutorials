@@ -1,4 +1,8 @@
+import 'package:expenses_tracker/widgets/user_transaction.dart';
 import 'package:flutter/material.dart';
+import 'models/Transaction.dart';
+import './widgets/transaction_list.dart';
+import './widgets/new_transaction.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +23,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  // String InputTitle;
+  // String InputAmount;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +33,7 @@ class HomePage extends StatelessWidget {
         title: Text("Expenses App"),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Card(
@@ -34,10 +41,7 @@ class HomePage extends StatelessWidget {
             child: Text("Chart!"),
             elevation: 10,
           ),
-          Card(
-            color: Colors.red,
-            child: Text("List!"),
-          )
+          UserTransactions(),
         ],
       ),
     );
